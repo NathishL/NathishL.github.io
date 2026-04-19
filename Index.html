@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nathish Lakshman | PhD Scholar in Neurogenetics</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0D1117;
+  --ink2:#1C2333;
+  --surface:#F8F6F1;
+  --surface2:#EFECEA;
+  --white:#FFFFFF;
+  --gold:#C8A96E;
+  --gold-light:#F0E5D0;
+  --gold-pale:#FBF6EE;
+  --teal:#2A7F7F;
+  --teal-light:#E0F0F0;
+  --teal-mid:#4DA6A6;
+  --accent:#8B4513;
+  --muted:#6E6861;
+  --muted2:#9A9590;
+  --border:#DDD8D0;
+  --border2:#C8C2B8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);overflow-x:hidden}
+
+/* ═══════════ CURSOR ═══════════ */
+body{cursor:none}
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;mix-blend-mode:multiply}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease;opacity:0.6}
+
+/* ═══════════ CANVAS BG ═══════════ */
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.04}
+
+/* ═══════════ NAV ═══════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:0 3rem;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(248,246,241,0.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:all 0.3s;
+}
+nav.scrolled{background:rgba(248,246,241,0.97);box-shadow:0 2px 24px rgba(0,0,0,0.06)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:0.02em}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;position:relative;transition:color 0.2s}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--ink);color:var(--surface)!important;padding:8px 20px;border-radius:6px;transition:background 0.2s!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--teal)!important;color:white!important}
+
+/* ═══════════ HERO ═══════════ */
+.hero{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;padding:100px 6rem 4rem;gap:5rem;
+  position:relative;overflow:hidden;z-index:1;
+}
+.hero::before{
+  content:'';position:absolute;top:0;right:0;width:55%;height:100%;
+  background:linear-gradient(160deg,#F0F5F0 0%,#E8EFE8 100%);
+  clip-path:polygon(8% 0%,100% 0%,100% 100%,0% 100%);
+  z-index:-1;
+}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem}
+.eyebrow-line{width:40px;height:1px;background:var(--gold)}
+.eyebrow-text{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(42px,5.5vw,68px);font-weight:900;line-height:1.08;color:var(--ink);margin-bottom:0.4rem}
+.hero h1 em{font-style:italic;color:var(--teal)}
+.hero-title{font-size:16px;font-weight:400;color:var(--muted);margin-bottom:2rem;line-height:1.6;max-width:460px}
+.hero-stats{display:flex;gap:2.5rem;margin-bottom:2.5rem;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.hs-item{}
+.hs-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);line-height:1}
+.hs-label{font-size:11px;color:var(--muted2);font-weight:400;margin-top:3px}
+.hero-btns{display:flex;gap:12px}
+.btn-gold{background:var(--gold);color:var(--ink);border:none;padding:14px 32px;border-radius:8px;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:8px;letter-spacing:0.04em;transition:all 0.2s}
+.btn-gold:hover{background:#B8954A;transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,169,110,0.35)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--border2);padding:13px 28px;border-radius:8px;font-size:13px;font-weight:500;font-family:'Outfit',sans-serif;cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s}
+.btn-ghost:hover{border-color:var(--ink);background:var(--ink);color:white;transform:translateY(-2px)}
+
+/* PHOTO SIDE */
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.photo-container{position:relative;width:360px}
+.photo-blob{
+  width:340px;height:420px;border-radius:60% 40% 55% 45%/50% 60% 40% 50%;
+  overflow:hidden;border:6px solid white;
+  box-shadow:0 32px 80px rgba(0,0,0,0.14),0 8px 24px rgba(0,0,0,0.07);
+  animation:blobmorph 8s ease-in-out infinite;
+  position:relative;z-index:2;
+}
+@keyframes blobmorph{
+  0%,100%{border-radius:60% 40% 55% 45%/50% 60% 40% 50%}
+  33%{border-radius:45% 55% 40% 60%/60% 40% 60% 40%}
+  66%{border-radius:55% 45% 60% 40%/45% 55% 45% 55%}
+}
+.photo-blob img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.photo-tag{
+  position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);
+  background:white;border-radius:12px;padding:12px 24px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.12);white-space:nowrap;z-index:3;
+  border:1px solid var(--border);
+}
+.pt-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink);text-align:center}
+.pt-role{font-size:11px;color:var(--teal);font-weight:500;text-align:center;margin-top:2px}
+.photo-orbit{
+  position:absolute;top:50%;left:50%;
+  width:420px;height:420px;
+  transform:translate(-50%,-50%);
+  border:1px dashed var(--border2);border-radius:50%;
+  animation:orbit-spin 20s linear infinite;z-index:1;
+}
+@keyframes orbit-spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.orbit-dot{
+  position:absolute;width:10px;height:10px;border-radius:50%;
+  background:var(--gold);top:0;left:50%;transform:translate(-50%,-50%);
+}
+
+/* FLOATING CARD */
+.float-card{
+  position:absolute;background:white;border-radius:14px;padding:14px 18px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.1);border:1px solid var(--border);
+  animation:float 4s ease-in-out infinite;z-index:4;
+}
+.float-card.fc1{top:10%;right:-40px;animation-delay:0s}
+.float-card.fc2{bottom:15%;left:-50px;animation-delay:2s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.fc-label{font-size:10px;color:var(--muted2);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px}
+.fc-value{font-size:13px;font-weight:600;color:var(--ink)}
+.fc-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4CAF50;margin-right:5px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* ═══════════ SECTION BASE ═══════════ */
+section{position:relative;z-index:1}
+.section-wrap{max-width:1200px;margin:0 auto;padding:6rem 3rem}
+.sec-header{margin-bottom:4rem}
+.sec-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;display:flex;align-items:center;gap:10px}
+.sec-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:var(--ink);line-height:1.2}
+.sec-title em{font-style:italic;color:var(--teal)}
+
+/* ═══════════ ABOUT ═══════════ */
+.about-section{background:white}
+.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start}
+.about-lede{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--ink);line-height:1.65;margin-bottom:1.5rem;font-style:italic}
+.about-body{font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:1rem}
+.guide-block{margin-top:2.5rem;padding:1.5rem 2rem;background:var(--surface);border-radius:14px;border-left:3px solid var(--teal)}
+.gb-label{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.gb-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink)}
+.gb-role{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.5}
+.about-aside{}
+.info-list{display:flex;flex-direction:column;gap:0}
+.info-item{display:flex;justify-content:space-between;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);gap:1rem}
+.info-item:last-child{border-bottom:none}
+.ii-label{font-size:11px;font-weight:600;color:var(--muted2);text-transform:uppercase;letter-spacing:0.08em;flex-shrink:0}
+.ii-val{font-size:13px;color:var(--ink);font-weight:500;text-align:right;line-height:1.5}
+.lang-bars{margin-top:2rem}
+.lang-row{margin-bottom:14px}
+.lang-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
+.lang-name{font-weight:600;color:var(--ink)}
+.lang-lv{color:var(--muted2);font-size:11px}
+.lang-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.lang-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-mid));border-radius:2px;transition:width 1.5s ease}
+
+/* ═══════════ EDUCATION ═══════════ */
+.edu-section{background:var(--surface)}
+.edu-timeline{position:relative;padding-left:3rem}
+.edu-timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),var(--teal),transparent)}
+.edu-item{position:relative;padding-bottom:3rem}
+.edu-item:last-child{padding-bottom:0}
+.edu-marker{position:absolute;left:-3rem;top:6px;width:24px;height:24px;border-radius:50%;background:white;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center}
+.edu-marker-inner{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.edu-year{font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.edu-degree{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.3}
+.edu-inst{font-size:14px;color:var(--teal);font-weight:500;margin-bottom:8px}
+.edu-desc{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* ═══════════ RESEARCH ═══════════ */
+.research-section{background:var(--ink)}
+.research-section .sec-eyebrow{color:var(--gold)}
+.research-section .sec-title{color:white}
+.research-section .sec-title em{color:var(--teal-mid)}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.res-card{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;padding:2rem;
+  transition:all 0.3s;position:relative;overflow:hidden;
+}
+.res-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--teal-mid));
+  opacity:0;transition:opacity 0.3s;
+}
+.res-card:hover{background:rgba(255,255,255,0.07);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.res-card:hover::before{opacity:1}
+.rc-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(200,169,110,0.15);color:var(--gold);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:1.25rem;border:1px solid rgba(200,169,110,0.2)}
+.rc-chip.live::before{content:'';width:6px;height:6px;border-radius:50%;background:#4CAF50;animation:pulse 2s infinite}
+.rc-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:white;margin-bottom:0.75rem;line-height:1.4}
+.rc-body{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.75}
+.rc-footer{margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,0.35)}
+.rc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem}
+.rc-tag{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);font-size:10px;padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.08)}
+
+/* ═══════════ SKILLS ═══════════ */
+.skills-section{background:white}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.sk-card{
+  border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;
+  background:var(--surface);transition:all 0.25s;position:relative;overflow:hidden;
+}
+.sk-card::after{
+  content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--teal),var(--gold));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
+}
+.sk-card:hover{border-color:var(--teal);transform:translateY(-2px);background:white;box-shadow:0 8px 24px rgba(42,127,127,0.1)}
+.sk-card:hover::after{transform:scaleX(1)}
+.sk-icon{font-size:22px;margin-bottom:10px}
+.sk-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.sk-cat{font-size:11px;color:var(--muted2)}
+.sk-badge{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:9px;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;border:1px solid rgba(42,127,127,0.2)}
+.sk-detail{font-size:11.5px;color:var(--muted);line-height:1.65;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.sk-card-wide{grid-column:span 2}
+
+/* ═══════════ PUBLICATIONS ═══════════ */
+.pub-section{background:var(--surface)}
+.pub-list{display:flex;flex-direction:column;gap:20px}
+.pub-card{
+  background:white;border-radius:16px;border:1px solid var(--border);
+  padding:2rem 2.5rem;transition:all 0.3s;position:relative;overflow:hidden;
+}
+.pub-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--gold),var(--teal));
+  border-radius:3px 0 0 3px;
+}
+.pub-card:hover{border-color:var(--teal-mid);transform:translateX(4px);box-shadow:0 12px 36px rgba(42,127,127,0.1)}
+.pub-meta{display:flex;align-items:center;gap:10px;margin-bottom:0.85rem;flex-wrap:wrap}
+.pub-year{display:inline-block;background:var(--gold-light);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:0.1em;padding:3px 10px;border-radius:20px;border:1px solid #E8D5A8}
+.pub-type{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:10px;font-weight:600;letter-spacing:0.08em;padding:3px 10px;border-radius:20px;border:1px solid rgba(42,127,127,0.2)}
+.pub-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);line-height:1.45;margin-bottom:0.6rem}
+.pub-authors{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:0.6rem}
+.pub-authors strong{color:var(--ink);font-weight:600}
+.pub-journal{font-size:12px;color:var(--teal);font-style:italic;margin-bottom:0.9rem;font-weight:500}
+.pub-doi{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted2);text-decoration:none;border:1px solid var(--border);padding:4px 12px;border-radius:6px;transition:all 0.2s;background:var(--surface)}
+.pub-doi:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-light)}
+.pub-doi::before{content:'🔗';font-size:10px}
+.pub-count-strip{display:flex;align-items:center;gap:2rem;background:linear-gradient(135deg,var(--ink),var(--ink2));border-radius:14px;padding:1.5rem 2.5rem;margin-bottom:2.5rem}
+.pcs-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:white;line-height:1}
+.pcs-label{font-size:11px;color:rgba(255,255,255,0.45);font-weight:400;margin-top:3px}
+.pcs-div{width:1px;height:40px;background:rgba(255,255,255,0.12)}
+.pub-status{display:flex;align-items:center;gap:12px;padding:1.25rem 1.5rem;background:var(--teal-light);border-radius:10px;border:1px solid rgba(42,127,127,0.2);margin-top:1.5rem}
+.ps-dot{width:10px;height:10px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;flex-shrink:0}
+.ps-text{font-size:13px;color:var(--teal);font-weight:500}
+
+/* ═══════════ ACHIEVEMENTS ═══════════ */
+.ach-section{background:white}
+.ach-featured{
+  background:linear-gradient(135deg,#FBF5E8,#FEF8EE);
+  border:1px solid #E8D5A8;border-radius:20px;padding:2.5rem 3rem;
+  display:flex;align-items:center;gap:3rem;margin-bottom:2rem;
+  position:relative;overflow:hidden;
+}
+.ach-featured::before{content:'🏆';font-size:100px;position:absolute;right:2rem;opacity:0.08;line-height:1}
+.af-trophy{font-size:56px;flex-shrink:0}
+.af-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.af-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3}
+.af-sub{font-size:14px;color:var(--muted);line-height:1.6}
+.certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cert-card{
+  border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.25rem;
+  text-align:center;background:var(--surface);transition:all 0.25s;
+}
+.cert-card:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 10px 30px rgba(42,127,127,0.1);background:white}
+.cert-icon{font-size:28px;margin-bottom:10px}
+.cert-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px;line-height:1.4}
+.cert-org{font-size:11px;color:var(--teal);font-weight:500}
+
+/* ═══════════ CONTACT ═══════════ */
+.contact-section{background:var(--surface)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-intro{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--muted);line-height:1.7;margin-bottom:2rem}
+.contact-items{display:flex;flex-direction:column;gap:14px}
+.ci{display:flex;align-items:flex-start;gap:16px;padding:1.25rem 1.5rem;background:white;border-radius:12px;border:1px solid var(--border);transition:border-color 0.2s}
+.ci:hover{border-color:var(--teal)}
+.ci-ico{width:40px;height:40px;border-radius:10px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.ci-label{font-size:10px;color:var(--muted2);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px}
+.ci-val{font-size:14px;color:var(--ink);font-weight:500}
+.ci-val a{color:var(--teal);text-decoration:none}
+.ci-val a:hover{text-decoration:underline}
+.connect-panel{background:var(--ink);border-radius:20px;padding:3rem;position:relative;overflow:hidden}
+.connect-panel::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(200,169,110,0.08)}
+.connect-panel::after{content:'';position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;border-radius:50%;background:rgba(42,127,127,0.08)}
+.cp-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+.cp-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:white;margin-bottom:1rem;line-height:1.3}
+.cp-body{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.75;margin-bottom:2rem}
+.social-row{display:flex;flex-direction:column;gap:10px}
+.soc-btn{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 18px;color:white;text-decoration:none;font-size:13px;font-weight:500;transition:all 0.2s;position:relative;z-index:1}
+.soc-btn:hover{background:rgba(255,255,255,0.12);transform:translateX(4px)}
+.soc-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.soc-li{background:rgba(0,119,181,0.3)}
+.soc-mail{background:rgba(200,169,110,0.2)}
+.soc-label{font-size:11px;color:rgba(255,255,255,0.4);margin-top:1px}
+
+/* ═══════════ FOOTER ═══════════ */
+footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.footer-brand{font-family:'Playfair Display',serif;font-size:15px;color:rgba(255,255,255,0.7)}
+.footer-brand span{color:var(--gold)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.3)}
+
+/* ═══════════ REVEAL ANIMATIONS ═══════════ */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:100px 2rem 4rem;gap:3rem;text-align:center}
+  .hero-eyebrow{justify-content:center}
+  .hero-btns{justify-content:center}
+  .hero-stats{justify-content:center}
+  .hero-visual{order:-1}
+  .photo-blob{width:240px;height:290px}
+  .float-card{display:none}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .res-grid{grid-template-columns:1fr}
+  .certs-grid{grid-template-columns:1fr 1fr}
+  .sk-card-wide{grid-column:span 1}
+  .pub-interest-grid{grid-template-columns:1fr}
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .section-wrap{padding:4rem 1.5rem}
+  .ach-featured{flex-direction:column;text-align:center;gap:1.5rem}
+  footer{flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">Nathish <span>L.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">PhD Scholar · Neurogenetics</span>
+    </div>
+    <h1>Nathish<br><em>Lakshman</em></h1>
+    <p class="hero-title">Human Genetics &amp; Molecular Biology · Bharathiar University, Coimbatore — decoding the genetic language of the nervous system.</p>
+    <div class="hero-stats">
+      <div class="hs-item">
+        <div class="hs-num">3+</div>
+        <div class="hs-label">Publications</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">M.Sc.</div>
+        <div class="hs-label">Human Genetics</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">1★</div>
+        <div class="hs-label">Int'l Award</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">4+</div>
+        <div class="hs-label">Certifications</div>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">Get in Touch</a>
+      <a href="#research" class="btn-ghost">Explore Research ↓</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="photo-container">
+      <div class="photo-orbit"><div class="orbit-dot"></div></div>
+      <div class="photo-blob">
+        <img src="data:image/jpeg;base64,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" alt="Nathish Lakshman">
+      </div>
+      <div class="photo-tag">
+        <div class="pt-name">Nathish Lakshman</div>
+        <div class="pt-role">PhD Scholar · Bharathiar University</div>
+      </div>
+      <div class="float-card fc1">
+        <div class="fc-label">Status</div>
+        <div class="fc-value"><span class="fc-dot"></span>Research Active</div>
+      </div>
+      <div class="float-card fc2">
+        <div class="fc-label">Specialisation</div>
+        <div class="fc-value">Neurogenetics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about-section" id="about">
+  <div class="section-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-eyebrow">About</div>
+      <div class="sec-title">The Science Behind <em>the Scientist</em></div>
+    </div>
+    <div class="about-grid">
+      <div class="reveal reveal-delay-1">
+        <p class="about-lede">"Understanding the genome is understanding life itself — one mutation at a time."</p>
+        <p class="about-body">I am a PhD scholar in Neurogenetics at the Department of Human Genetics and Molecular Biology, Bharathiar University, Coimbatore. My doctoral research focuses on uncovering the genetic and molecular mechanisms that underpin neurological conditions, with a particular interest in oxidative stress pathways and gene mutation analysis.</p>
+        <p class="about-body">My academic journey began with a Bachelor of Science in Biotechnology from PSG College of Arts and Science, followed by a Master of Science in Human Genetics and Molecular Biology at Bharathiar University. During my Master's, I conducted award-winning research on the neuroprotective effects of <em>Convolvulus pluricaulis</em> extract and PARK7 gene mutation in SH-SY5Y neuroblastoma cell lines.</p>
+        <p class="about-body">I am driven by the conviction that molecular insights can translate into therapeutic breakthroughs for neurodegenerative diseases — and I am committed to producing rigorous, reproducible science toward that goal.</p>
+        <div class="guide-block">
+          <div class="gb-label">Research Guide</div>
+          <div class="gb-name">Dr. R. Sivasamy</div>
+          <div class="gb-role">Assistant Professor · Department of Human Genetics and Molecular Biology · Bharathiar University, Coimbatore – 641046</div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="info-list">
+          <div class="info-item"><span class="ii-label">Degree</span><span class="ii-val">PhD (Ongoing)</span></div>
+          <div class="info-item"><span class="ii-label">Field</span><span class="ii-val">Neurogenetics</span></div>
+          <div class="info-item"><span class="ii-label">Institution</span><span class="ii-val">Bharathiar University</span></div>
+          <div class="info-item"><span class="ii-label">Location</span><span class="ii-val">Coimbatore, Tamil Nadu</span></div>
+          <div class="info-item"><span class="ii-label">Email</span><span class="ii-val"><a href="mailto:nathishlakshman@gmail.com" style="color:var(--teal)">nathishlakshman@gmail.com</a></span></div>
+        </div>
+        <div class="lang-bars" style="margin-top:2rem">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:1rem">Languages</div>
+          <div class="lang-row"><div class="lang-top"><span class="lang-name">Tamil</span><span class="lang-lv">Native</span></div><div class="lang-track"><div class="lang-fill" style="width:100%"></div></div></div>
+          <div class="lang-row"><div class="lang-top"><span class="lang-name">English</span><span class="lang-lv">Proficient</span></div><div class="lang-track"><div class="lang-fill" style="width:80%"></div></div></div>
+          <div class="lang-row"><div class="lang-top"><span class="lang-name">Hindi</span><span class="lang-lv">Beginner</span></div><div class="lang-track"><div class="lang-fill" style="width:25%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EDUCATION ═══ -->
+<section class="edu-section" id="education">
+  <div class="section-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-eyebrow">Education</div>
+      <div class="sec-title">Academic <em>Journey</em></div>
+    </div>
+    <div class="edu-timeline">
+      <div class="edu-item reveal">
+        <div class="edu-marker"><div class="edu-marker-inner"></div></div>
+        <div class="edu-year">2024 – Present</div>
+        <div class="edu-degree">Doctor of Philosophy · Neurogenetics</div>
+        <div class="edu-inst">Bharathiar University, Coimbatore, Tamil Nadu</div>
+        <div class="edu-desc">PhD research focused on the genetic mechanisms underlying neurological conditions, conducted under the supervision of Dr. R. Sivasamy at the Department of Human Genetics and Molecular Biology.</div>
+      </div>
+      <div class="edu-item reveal reveal-delay-1">
+        <div class="edu-marker"><div class="edu-marker-inner"></div></div>
+        <div class="edu-year">2022 – 2024</div>
+        <div class="edu-degree">Master of Science · Human Genetics &amp; Molecular Biology</div>
+        <div class="edu-inst">Bharathiar University, Coimbatore, Tamil Nadu</div>
+        <div class="edu-desc">Completed a research-intensive Master's with a project on the neuroprotective potential of <em>Convolvulus pluricaulis</em> extract and PARK7 gene mutation analysis. Won Best Paper Presentation Award at ICLS-ETFP 2024.</div>
+      </div>
+      <div class="edu-item reveal reveal-delay-2">
+        <div class="edu-marker"><div class="edu-marker-inner"></div></div>
+        <div class="edu-year">2019 – 2022</div>
+        <div class="edu-degree">Bachelor of Science · Biotechnology</div>
+        <div class="edu-inst">PSG College of Arts and Science, Coimbatore, Tamil Nadu</div>
+        <div class="edu-desc">Foundation training in biotechnology, molecular biology, and life sciences, providing the grounding for advanced postgraduate research.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESEARCH ═══ -->
+<section class="research-section" id="research">
+  <div class="section-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-eyebrow">Research</div>
+      <div class="sec-title">Areas of <em>Investigation</em></div>
+    </div>
+    <div class="res-grid">
+      <div class="res-card reveal">
+        <div class="rc-chip live">● Ongoing · PhD</div>
+        <div class="rc-title">Neurogenetics &amp; Gene Mutation Analysis</div>
+        <p class="rc-body">Doctoral research exploring the genetic basis of neurological conditions at the Department of Human Genetics and Molecular Biology, Bharathiar University. Focus on identifying gene variants and mutations relevant to neurodegeneration, with integrated NGS data analysis and differential gene expression profiling.</p>
+        <div class="rc-tags"><span class="rc-tag">Neurogenetics</span><span class="rc-tag">Gene Mutation</span><span class="rc-tag">NGS</span><span class="rc-tag">RNA-Seq</span><span class="rc-tag">DGE Analysis</span></div>
+        <div class="rc-footer">Bharathiar University · Coimbatore</div>
+      </div>
+      <div class="res-card reveal reveal-delay-1">
+        <div class="rc-chip">Master's Project · 2023–2024</div>
+        <div class="rc-title">Neuroprotective Potential of <em>Convolvulus pluricaulis</em></div>
+        <p class="rc-body">Investigated the neuroprotective activity of <em>Convolvulus pluricaulis</em> extract against H₂O₂-induced oxidative stress. Performed PARK7 gene mutation analysis in SH-SY5Y human neuroblastoma cell lines using a battery of molecular and cellular assays.</p>
+        <div class="rc-tags"><span class="rc-tag">PARK7</span><span class="rc-tag">Oxidative Stress</span><span class="rc-tag">SH-SY5Y</span><span class="rc-tag">H₂O₂</span></div>
+        <div class="rc-footer">Molecular Genetics & Cancer Biology Lab · Dec 2023 – Apr 2024</div>
+      </div>
+      <div class="res-card reveal reveal-delay-2">
+        <div class="rc-chip">Internship · May – Jun 2023</div>
+        <div class="rc-title">Advanced Molecular Biology Techniques</div>
+        <p class="rc-body">Intensive hands-on internship at the Molecular Genetics and Cancer Biology Laboratory, Bharathiar University. Trained in mammalian cell culture, PCR, gel electrophoresis, fluorescence staining, and oxidative stress assays.</p>
+        <div class="rc-tags"><span class="rc-tag">Cell Culture</span><span class="rc-tag">PCR</span><span class="rc-tag">Assay Design</span></div>
+        <div class="rc-footer">Molecular Genetics & Cancer Biology Lab · Bharathiar University</div>
+      </div>
+      <div class="res-card reveal reveal-delay-3">
+        <div class="rc-chip">Interest Area</div>
+        <div class="rc-title">Neurodegenerative Disease &amp; Oxidative Stress Pathways</div>
+        <p class="rc-body">Broad research interest in the molecular and genetic underpinnings of Parkinson's-related pathways, oxidative stress mechanisms, and cell-level neuroprotection strategies relevant to diseases such as Parkinson's and Alzheimer's.</p>
+        <div class="rc-tags"><span class="rc-tag">Parkinson's</span><span class="rc-tag">Neurodegeneration</span><span class="rc-tag">Oxidative Stress</span></div>
+        <div class="rc-footer">Active Interest Area · PhD</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section class="skills-section" id="skills">
+  <div class="section-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-eyebrow">Technical Skills</div>
+      <div class="sec-title">Laboratory <em>Expertise</em></div>
+    </div>
+    <div class="skills-grid">
+      <div class="sk-card reveal"><div class="sk-icon">🧬</div><div class="sk-name">DNA Isolation &amp; Quantification</div><div class="sk-cat">Molecular Extraction</div></div>
+      <div class="sk-card reveal reveal-delay-1"><div class="sk-icon">🔬</div><div class="sk-name">RNA Isolation &amp; Quantification</div><div class="sk-cat">Molecular Extraction</div></div>
+      <div class="sk-card reveal reveal-delay-2"><div class="sk-icon">⚗️</div><div class="sk-name">Protein Isolation &amp; Quantification</div><div class="sk-cat">Biochemistry</div></div>
+      <div class="sk-card reveal"><div class="sk-icon">📊</div><div class="sk-name">Agarose Gel Electrophoresis (AGE)</div><div class="sk-cat">Gel Analysis</div></div>
+      <div class="sk-card reveal reveal-delay-1"><div class="sk-icon">🧪</div><div class="sk-name">SDS-PAGE</div><div class="sk-cat">Protein Analysis</div></div>
+      <div class="sk-card reveal reveal-delay-2"><div class="sk-icon">🔁</div><div class="sk-name">Polymerase Chain Reaction (PCR)</div><div class="sk-cat">Gene Amplification</div></div>
+      <div class="sk-card reveal"><div class="sk-icon">🦠</div><div class="sk-name">Mammalian Cell Culture</div><div class="sk-cat">Cell Biology</div></div>
+      <div class="sk-card reveal reveal-delay-1"><div class="sk-icon">📉</div><div class="sk-name">MTT Assay</div><div class="sk-cat">Cell Viability</div></div>
+      <div class="sk-card reveal reveal-delay-2"><div class="sk-icon">☄️</div><div class="sk-name">COMET Assay</div><div class="sk-cat">DNA Damage Analysis</div></div>
+      <div class="sk-card reveal sk-card-wide"><div class="sk-icon">🔬</div><div class="sk-name">Fluorescence Staining <span class="sk-badge">DCFH-DA &amp; Rh123</span></div><div class="sk-cat">ROS Detection &amp; Mitochondrial Membrane Potential</div><div class="sk-detail">DCFH-DA for intracellular reactive oxygen species quantification; Rhodamine 123 (Rh123) for assessment of mitochondrial membrane potential — both employed in H₂O₂-induced oxidative stress models in SH-SY5Y neuroblastoma cells.</div></div>
+      <div class="sk-card reveal reveal-delay-1"><div class="sk-icon">🧩</div><div class="sk-name">Gene Mutation Analysis</div><div class="sk-cat">Genomics</div></div>
+      <div class="sk-card reveal reveal-delay-2"><div class="sk-icon">🗂️</div><div class="sk-name">NGS Data Analysis</div><div class="sk-cat">Next-Generation Sequencing</div><div class="sk-detail">Processing and analysis of high-throughput sequencing data including quality control, read alignment, variant calling, and annotation pipelines using tools such as FastQC, BWA, GATK, and Bioconductor.</div></div>
+      <div class="sk-card reveal reveal-delay-3"><div class="sk-icon">📊</div><div class="sk-name">Differential Gene Expression Analysis</div><div class="sk-cat">Transcriptomics &amp; RNA-Seq</div><div class="sk-detail">Statistical analysis of gene expression changes across conditions using DESeq2, edgeR, and limma; pathway enrichment (GO, KEGG); volcano plots and heatmap visualisation; pseudogene and non-coding RNA profiling.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PUBLICATIONS ═══ -->
+<section class="pub-section" id="publications">
+  <div class="section-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-eyebrow">Publications</div>
+      <div class="sec-title">Research <em>Output</em></div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="pub-count-strip reveal">
+      <div><div class="pcs-num">3</div><div class="pcs-label">Peer-Reviewed Publications</div></div>
+      <div class="pcs-div"></div>
+      <div><div class="pcs-num">2025–26</div><div class="pcs-label">Publication Years</div></div>
+      <div class="pcs-div"></div>
+      <div><div class="pcs-num">3</div><div class="pcs-label">International Journals / Books</div></div>
+    </div>
+
+    <div class="pub-list">
+
+      <!-- Publication 1 -->
+      <div class="pub-card reveal">
+        <div class="pub-meta">
+          <span class="pub-year">2026</span>
+          <span class="pub-type">Journal Article · RNA-Seq</span>
+        </div>
+        <div class="pub-title">Transcriptome sequencing (RNA-Seq) reveals non-coding pseudogene CDC27P9 role in cervical cancer</div>
+        <div class="pub-authors">Antony Edwin Rodrigues, F., Krishnan, D., Abbas, H. H., Raj, M. J. M., Subramani, S., <strong>Lakshman, N.</strong>, Justin, A., Govindaraj, S., &amp; Ramasamy, S.</div>
+        <div class="pub-journal">Apoptosis: An International Journal on Programmed Cell Death, 31(4), 111</div>
+        <a href="https://doi.org/10.1007/s10495-026-02327-w" target="_blank" class="pub-doi">https://doi.org/10.1007/s10495-026-02327-w</a>
+      </div>
+
+      <!-- Publication 2 -->
+      <div class="pub-card reveal reveal-delay-1">
+        <div class="pub-meta">
+          <span class="pub-year">2025</span>
+          <span class="pub-type">Journal Article · Neuroscience</span>
+        </div>
+        <div class="pub-title">Oro-pharyngeal mucosal microbiome alterations causing immune system dysregulation in schizophrenia</div>
+        <div class="pub-authors">Krishnan, D., Ghosh, P., <strong>Lakshman, N.</strong>, Justin, A., &amp; Ramasamy, S.</div>
+        <div class="pub-journal">International Review of Neurobiology, 180, 125–156</div>
+        <a href="https://doi.org/10.1016/bs.irn.2025.03.003" target="_blank" class="pub-doi">https://doi.org/10.1016/bs.irn.2025.03.003</a>
+      </div>
+
+      <!-- Publication 3 -->
+      <div class="pub-card reveal reveal-delay-2">
+        <div class="pub-meta">
+          <span class="pub-year">2025</span>
+          <span class="pub-type">Book Chapter · Neurodegenerative Disease</span>
+        </div>
+        <div class="pub-title">Small molecular therapeutic targets for neurodegenerative diseases</div>
+        <div class="pub-authors">Rangappa, N., Upadhyay, R., <strong>Lakshman, N.</strong>, Ramasamy, S., Sevanan, M., Justin, A., &amp; Chinnathambi, S.</div>
+        <div class="pub-journal">Advances in Protein Chemistry and Structural Biology</div>
+        <a href="https://doi.org/10.1016/bs.apcsb.2025.10.012" target="_blank" class="pub-doi">https://doi.org/10.1016/bs.apcsb.2025.10.012</a>
+      </div>
+
+    </div>
+
+    <div class="pub-status reveal" style="margin-top:2rem">
+      <div class="ps-dot"></div>
+      <div class="ps-text">Active PhD research ongoing · Further publications expected — check back for updates.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACHIEVEMENTS ═══ -->
+<section class="ach-section" id="achievements">
+  <div class="section-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-eyebrow">Achievements</div>
+      <div class="sec-title">Awards &amp; <em>Certifications</em></div>
+    </div>
+    <div class="ach-featured reveal">
+      <div class="af-trophy">🏆</div>
+      <div>
+        <div class="af-label">Featured Award · April 2024</div>
+        <div class="af-title">Best Paper Presentation Award</div>
+        <div class="af-sub">Two Day International Conference on Life Science: Emerging Trends and Future Perspectives (ICLS-ETFP) — Recognised for outstanding research presentation in the life sciences at an international forum.</div>
+      </div>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card reveal">
+        <div class="cert-icon">🎓</div>
+        <div class="cert-title">Introduction to Genomic Technologies</div>
+        <div class="cert-org">Johns Hopkins University</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-1">
+        <div class="cert-icon">🧬</div>
+        <div class="cert-title">RNA Biology</div>
+        <div class="cert-org">NPTEL</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-2">
+        <div class="cert-icon">🧘</div>
+        <div class="cert-title">Stress Management</div>
+        <div class="cert-org">NPTEL</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-3">
+        <div class="cert-icon">🔬</div>
+        <div class="cert-title">The Science of Stem Cells</div>
+        <div class="cert-org">American Museum of Natural History</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact-section" id="contact">
+  <div class="section-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-eyebrow">Contact</div>
+      <div class="sec-title">Let's <em>Connect</em></div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro reveal">"Science advances through collaboration. I welcome conversations with fellow researchers, collaborators, and anyone curious about neurogenetics."</p>
+        <div class="contact-items">
+          <div class="ci reveal">
+            <div class="ci-ico">📧</div>
+            <div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:nathishlakshman@gmail.com">nathishlakshman@gmail.com</a></div></div>
+          </div>
+          <div class="ci reveal reveal-delay-1">
+            <div class="ci-ico">📞</div>
+            <div><div class="ci-label">Phone</div><div class="ci-val">+91 6379310947</div></div>
+          </div>
+          <div class="ci reveal reveal-delay-2">
+            <div class="ci-ico">🏛️</div>
+            <div><div class="ci-label">Institution</div><div class="ci-val">Dept. of Human Genetics &amp; Molecular Biology, Bharathiar University, Coimbatore – 641046</div></div>
+          </div>
+          <div class="ci reveal reveal-delay-3">
+            <div class="ci-ico">📍</div>
+            <div><div class="ci-label">Hometown</div><div class="ci-val">Chinnamuthur, Sundekuppam, Krishnagiri Dt – 635101, Tamil Nadu, India</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="connect-panel">
+          <div class="cp-label">Connect Online</div>
+          <div class="cp-title">Open to Collaboration &amp; Discussion</div>
+          <p class="cp-body">Whether you're a fellow researcher, a prospective collaborator, or simply want to discuss neurogenetics and molecular biology — reach out. I'm always happy to connect with the scientific community.</p>
+          <div class="social-row">
+            <a href="https://www.linkedin.com/in/nathish-l-20360b220" target="_blank" class="soc-btn">
+              <div class="soc-icon soc-li">in</div>
+              <div><div style="font-size:13px;font-weight:600">LinkedIn</div><div class="soc-label">Nathish Lakshman</div></div>
+            </a>
+            <a href="mailto:nathishlakshman@gmail.com" class="soc-btn">
+              <div class="soc-icon soc-mail">✉</div>
+              <div><div style="font-size:13px;font-weight:600">Email</div><div class="soc-label">nathishlakshman@gmail.com</div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Nathish <span>Lakshman</span></div>
+  <div class="footer-copy">© 2026 · PhD Scholar in Neurogenetics · Bharathiar University</div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+setInterval(()=>{rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px'},16);
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';cursor.style.transform='translate(-50%,-50%) scale(0.5)'});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';cursor.style.transform='translate(-50%,-50%) scale(1)'})});
+
+// Nav scroll
+window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60)});
+
+// Reveal on scroll
+const reveals=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.12});
+reveals.forEach(el=>io.observe(el));
+
+// Background canvas — subtle DNA helix dots
+const canvas=document.getElementById('bg-canvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;drawBg()});
+function drawBg(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=0;i<60;i++){
+    const x=Math.random()*canvas.width,y=Math.random()*canvas.height,r=Math.random()*3+1;
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fillStyle=i%3===0?'#C8A96E':i%3===1?'#2A7F7F':'#0D1117';ctx.fill();
+  }
+}
+drawBg();
+</script>
+</body>
+</html>
