@@ -8,44 +8,26 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#0D1117;
-  --ink2:#1C2333;
-  --surface:#F8F6F1;
-  --surface2:#EFECEA;
-  --white:#FFFFFF;
-  --gold:#C8A96E;
-  --gold-light:#F0E5D0;
-  --gold-pale:#FBF6EE;
-  --teal:#2A7F7F;
-  --teal-light:#E0F0F0;
-  --teal-mid:#4DA6A6;
-  --accent:#8B4513;
-  --muted:#6E6861;
-  --muted2:#9A9590;
-  --border:#DDD8D0;
-  --border2:#C8C2B8;
+  --ink:#0D1117;--ink2:#1C2333;--surface:#F8F6F1;--surface2:#EFECEA;
+  --white:#FFFFFF;--gold:#C8A96E;--gold-light:#F0E5D0;--gold-pale:#FBF6EE;
+  --teal:#2A7F7F;--teal-light:#E0F0F0;--teal-mid:#4DA6A6;
+  --accent:#8B4513;--muted:#6E6861;--muted2:#9A9590;
+  --border:#DDD8D0;--border2:#C8C2B8;
+  --red:#8B2020;--red-bg:#FBF0F0;--red-border:#E8C0C0;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);overflow-x:hidden}
 
-/* ═══════════ CURSOR ═══════════ */
+/* ── CURSOR ── */
 body{cursor:none}
 .cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;mix-blend-mode:multiply}
 .cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease;opacity:0.6}
 
-/* ═══════════ CANVAS BG ═══════════ */
+/* ── CANVAS BG ── */
 #bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.04}
 
-/* ═══════════ NAV ═══════════ */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  padding:0 3rem;height:64px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(248,246,241,0.88);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  transition:all 0.3s;
-}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 3rem;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(248,246,241,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all 0.3s}
 nav.scrolled{background:rgba(248,246,241,0.97);box-shadow:0 2px 24px rgba(0,0,0,0.06)}
 .nav-logo{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:0.02em}
 .nav-logo span{color:var(--gold)}
@@ -58,18 +40,9 @@ nav.scrolled{background:rgba(248,246,241,0.97);box-shadow:0 2px 24px rgba(0,0,0,
 .nav-cta::after{display:none!important}
 .nav-cta:hover{background:var(--teal)!important;color:white!important}
 
-/* ═══════════ HERO ═══════════ */
-.hero{
-  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;padding:100px 6rem 4rem;gap:5rem;
-  position:relative;overflow:hidden;z-index:1;
-}
-.hero::before{
-  content:'';position:absolute;top:0;right:0;width:55%;height:100%;
-  background:linear-gradient(160deg,#F0F5F0 0%,#E8EFE8 100%);
-  clip-path:polygon(8% 0%,100% 0%,100% 100%,0% 100%);
-  z-index:-1;
-}
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 6rem 4rem;gap:5rem;position:relative;overflow:hidden;z-index:1}
+.hero::before{content:'';position:absolute;top:0;right:0;width:55%;height:100%;background:linear-gradient(160deg,#F0F5F0 0%,#E8EFE8 100%);clip-path:polygon(8% 0%,100% 0%,100% 100%,0% 100%);z-index:-1}
 .hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem}
 .eyebrow-line{width:40px;height:1px;background:var(--gold)}
 .eyebrow-text{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold)}
@@ -77,7 +50,6 @@ nav.scrolled{background:rgba(248,246,241,0.97);box-shadow:0 2px 24px rgba(0,0,0,
 .hero h1 em{font-style:italic;color:var(--teal)}
 .hero-title{font-size:16px;font-weight:400;color:var(--muted);margin-bottom:2rem;line-height:1.6;max-width:460px}
 .hero-stats{display:flex;gap:2.5rem;margin-bottom:2.5rem;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.hs-item{}
 .hs-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);line-height:1}
 .hs-label{font-size:11px;color:var(--muted2);font-weight:400;margin-top:3px}
 .hero-btns{display:flex;gap:12px}
@@ -86,49 +58,19 @@ nav.scrolled{background:rgba(248,246,241,0.97);box-shadow:0 2px 24px rgba(0,0,0,
 .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--border2);padding:13px 28px;border-radius:8px;font-size:13px;font-weight:500;font-family:'Outfit',sans-serif;cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s}
 .btn-ghost:hover{border-color:var(--ink);background:var(--ink);color:white;transform:translateY(-2px)}
 
-/* PHOTO SIDE */
+/* PHOTO */
 .hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
 .photo-container{position:relative;width:360px}
-.photo-blob{
-  width:340px;height:420px;border-radius:60% 40% 55% 45%/50% 60% 40% 50%;
-  overflow:hidden;border:6px solid white;
-  box-shadow:0 32px 80px rgba(0,0,0,0.14),0 8px 24px rgba(0,0,0,0.07);
-  animation:blobmorph 8s ease-in-out infinite;
-  position:relative;z-index:2;
-}
-@keyframes blobmorph{
-  0%,100%{border-radius:60% 40% 55% 45%/50% 60% 40% 50%}
-  33%{border-radius:45% 55% 40% 60%/60% 40% 60% 40%}
-  66%{border-radius:55% 45% 60% 40%/45% 55% 45% 55%}
-}
+.photo-blob{width:340px;height:420px;border-radius:60% 40% 55% 45%/50% 60% 40% 50%;overflow:hidden;border:6px solid white;box-shadow:0 32px 80px rgba(0,0,0,0.14),0 8px 24px rgba(0,0,0,0.07);animation:blobmorph 8s ease-in-out infinite;position:relative;z-index:2}
+@keyframes blobmorph{0%,100%{border-radius:60% 40% 55% 45%/50% 60% 40% 50%}33%{border-radius:45% 55% 40% 60%/60% 40% 60% 40%}66%{border-radius:55% 45% 60% 40%/45% 55% 45% 55%}}
 .photo-blob img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.photo-tag{
-  position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);
-  background:white;border-radius:12px;padding:12px 24px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.12);white-space:nowrap;z-index:3;
-  border:1px solid var(--border);
-}
+.photo-tag{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);background:white;border-radius:12px;padding:12px 24px;box-shadow:0 8px 32px rgba(0,0,0,0.12);white-space:nowrap;z-index:3;border:1px solid var(--border)}
 .pt-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink);text-align:center}
 .pt-role{font-size:11px;color:var(--teal);font-weight:500;text-align:center;margin-top:2px}
-.photo-orbit{
-  position:absolute;top:50%;left:50%;
-  width:420px;height:420px;
-  transform:translate(-50%,-50%);
-  border:1px dashed var(--border2);border-radius:50%;
-  animation:orbit-spin 20s linear infinite;z-index:1;
-}
+.photo-orbit{position:absolute;top:50%;left:50%;width:420px;height:420px;transform:translate(-50%,-50%);border:1px dashed var(--border2);border-radius:50%;animation:orbit-spin 20s linear infinite;z-index:1}
 @keyframes orbit-spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
-.orbit-dot{
-  position:absolute;width:10px;height:10px;border-radius:50%;
-  background:var(--gold);top:0;left:50%;transform:translate(-50%,-50%);
-}
-
-/* FLOATING CARD */
-.float-card{
-  position:absolute;background:white;border-radius:14px;padding:14px 18px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.1);border:1px solid var(--border);
-  animation:float 4s ease-in-out infinite;z-index:4;
-}
+.orbit-dot{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--gold);top:0;left:50%;transform:translate(-50%,-50%)}
+.float-card{position:absolute;background:white;border-radius:14px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.1);border:1px solid var(--border);animation:float 4s ease-in-out infinite;z-index:4}
 .float-card.fc1{top:10%;right:-40px;animation-delay:0s}
 .float-card.fc2{bottom:15%;left:-50px;animation-delay:2s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
@@ -137,7 +79,7 @@ nav.scrolled{background:rgba(248,246,241,0.97);box-shadow:0 2px 24px rgba(0,0,0,
 .fc-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4CAF50;margin-right:5px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
-/* ═══════════ SECTION BASE ═══════════ */
+/* ── SECTIONS ── */
 section{position:relative;z-index:1}
 .section-wrap{max-width:1200px;margin:0 auto;padding:6rem 3rem}
 .sec-header{margin-bottom:4rem}
@@ -146,7 +88,7 @@ section{position:relative;z-index:1}
 .sec-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:var(--ink);line-height:1.2}
 .sec-title em{font-style:italic;color:var(--teal)}
 
-/* ═══════════ ABOUT ═══════════ */
+/* ── ABOUT ── */
 .about-section{background:white}
 .about-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start}
 .about-lede{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--ink);line-height:1.65;margin-bottom:1.5rem;font-style:italic}
@@ -155,21 +97,20 @@ section{position:relative;z-index:1}
 .gb-label{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
 .gb-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink)}
 .gb-role{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.5}
-.about-aside{}
-.info-list{display:flex;flex-direction:column;gap:0}
 .info-item{display:flex;justify-content:space-between;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);gap:1rem}
 .info-item:last-child{border-bottom:none}
 .ii-label{font-size:11px;font-weight:600;color:var(--muted2);text-transform:uppercase;letter-spacing:0.08em;flex-shrink:0}
 .ii-val{font-size:13px;color:var(--ink);font-weight:500;text-align:right;line-height:1.5}
+.ii-val a{color:var(--teal);text-decoration:none}
 .lang-bars{margin-top:2rem}
 .lang-row{margin-bottom:14px}
 .lang-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
 .lang-name{font-weight:600;color:var(--ink)}
 .lang-lv{color:var(--muted2);font-size:11px}
 .lang-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
-.lang-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-mid));border-radius:2px;transition:width 1.5s ease}
+.lang-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-mid));border-radius:2px}
 
-/* ═══════════ EDUCATION ═══════════ */
+/* ── EDUCATION ── */
 .edu-section{background:var(--surface)}
 .edu-timeline{position:relative;padding-left:3rem}
 .edu-timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),var(--teal),transparent)}
@@ -182,108 +123,101 @@ section{position:relative;z-index:1}
 .edu-inst{font-size:14px;color:var(--teal);font-weight:500;margin-bottom:8px}
 .edu-desc{font-size:13px;color:var(--muted);line-height:1.7}
 
-/* ═══════════ RESEARCH ═══════════ */
+/* ── RESEARCH ── */
 .research-section{background:var(--ink)}
 .research-section .sec-eyebrow{color:var(--gold)}
 .research-section .sec-title{color:white}
 .research-section .sec-title em{color:var(--teal-mid)}
 .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.res-card{
-  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;padding:2rem;
-  transition:all 0.3s;position:relative;overflow:hidden;
-}
-.res-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--gold),var(--teal-mid));
-  opacity:0;transition:opacity 0.3s;
-}
+.res-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem;transition:all 0.3s;position:relative;overflow:hidden}
+.res-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal-mid));opacity:0;transition:opacity 0.3s}
 .res-card:hover{background:rgba(255,255,255,0.07);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
 .res-card:hover::before{opacity:1}
 .rc-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(200,169,110,0.15);color:var(--gold);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:1.25rem;border:1px solid rgba(200,169,110,0.2)}
 .rc-chip.live::before{content:'';width:6px;height:6px;border-radius:50%;background:#4CAF50;animation:pulse 2s infinite}
 .rc-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:white;margin-bottom:0.75rem;line-height:1.4}
 .rc-body{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.75}
-.rc-footer{margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,0.35)}
+.rc-footer{margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07);font-size:11px;color:rgba(255,255,255,0.35)}
 .rc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem}
 .rc-tag{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);font-size:10px;padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.08)}
 
-/* ═══════════ SKILLS ═══════════ */
+/* ── SKILLS ── */
 .skills-section{background:white}
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-.sk-card{
-  border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;
-  background:var(--surface);transition:all 0.25s;position:relative;overflow:hidden;
-}
-.sk-card::after{
-  content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;
-  background:linear-gradient(90deg,var(--teal),var(--gold));
-  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
-}
+.sk-card{border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;background:var(--surface);transition:all 0.25s;position:relative;overflow:hidden}
+.sk-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--teal),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
 .sk-card:hover{border-color:var(--teal);transform:translateY(-2px);background:white;box-shadow:0 8px 24px rgba(42,127,127,0.1)}
 .sk-card:hover::after{transform:scaleX(1)}
 .sk-icon{font-size:22px;margin-bottom:10px}
 .sk-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
 .sk-cat{font-size:11px;color:var(--muted2)}
-.sk-badge{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:9px;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle;border:1px solid rgba(42,127,127,0.2)}
 .sk-detail{font-size:11.5px;color:var(--muted);line-height:1.65;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.sk-badge{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:9px;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:20px;margin-left:6px;border:1px solid rgba(42,127,127,0.2)}
 .sk-card-wide{grid-column:span 2}
 
-/* ═══════════ PUBLICATIONS ═══════════ */
+/* ── PUBLICATIONS ── */
 .pub-section{background:var(--surface)}
-.pub-list{display:flex;flex-direction:column;gap:20px}
-.pub-card{
-  background:white;border-radius:16px;border:1px solid var(--border);
-  padding:2rem 2.5rem;transition:all 0.3s;position:relative;overflow:hidden;
-}
-.pub-card::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(to bottom,var(--gold),var(--teal));
-  border-radius:3px 0 0 3px;
-}
-.pub-card:hover{border-color:var(--teal-mid);transform:translateX(4px);box-shadow:0 12px 36px rgba(42,127,127,0.1)}
-.pub-meta{display:flex;align-items:center;gap:10px;margin-bottom:0.85rem;flex-wrap:wrap}
-.pub-year{display:inline-block;background:var(--gold-light);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:0.1em;padding:3px 10px;border-radius:20px;border:1px solid #E8D5A8}
-.pub-type{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:10px;font-weight:600;letter-spacing:0.08em;padding:3px 10px;border-radius:20px;border:1px solid rgba(42,127,127,0.2)}
-.pub-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);line-height:1.45;margin-bottom:0.6rem}
-.pub-authors{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:0.6rem}
-.pub-authors strong{color:var(--ink);font-weight:600}
-.pub-journal{font-size:12px;color:var(--teal);font-style:italic;margin-bottom:0.9rem;font-weight:500}
-.pub-doi{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted2);text-decoration:none;border:1px solid var(--border);padding:4px 12px;border-radius:6px;transition:all 0.2s;background:var(--surface)}
-.pub-doi:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-light)}
-.pub-doi::before{content:'🔗';font-size:10px}
 .pub-count-strip{display:flex;align-items:center;gap:2rem;background:linear-gradient(135deg,var(--ink),var(--ink2));border-radius:14px;padding:1.5rem 2.5rem;margin-bottom:2.5rem}
 .pcs-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:white;line-height:1}
-.pcs-label{font-size:11px;color:rgba(255,255,255,0.45);font-weight:400;margin-top:3px}
+.pcs-label{font-size:11px;color:rgba(255,255,255,0.45);margin-top:3px}
 .pcs-div{width:1px;height:40px;background:rgba(255,255,255,0.12)}
+.pub-list{display:flex;flex-direction:column;gap:0;border-radius:16px;overflow:hidden;border:1px solid var(--border)}
+.pub-card{background:white;padding:0;transition:all 0.3s;position:relative;display:flex;border-bottom:1px solid var(--border)}
+.pub-card:last-child{border-bottom:none}
+.pub-card:hover{background:#FAFAF8}
+.pub-card:hover .pub-year-col{background:var(--teal)}
+.pub-year-col{background:var(--ink);color:rgba(255,255,255,0.7);font-size:13px;font-weight:700;letter-spacing:0.08em;padding:2rem 1.25rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;min-width:72px;writing-mode:vertical-rl;text-orientation:mixed;transition:background 0.3s}
+.pub-body{padding:1.75rem 2rem;flex:1}
+.pub-type-row{display:flex;align-items:center;gap:8px;margin-bottom:0.75rem;flex-wrap:wrap}
+.pub-type{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px}
+.type-rnaseq{background:var(--teal-light);color:var(--teal);border:1px solid rgba(42,127,127,0.2)}
+.type-neuro{background:var(--gold-pale);color:var(--accent);border:1px solid var(--gold-light)}
+.type-book{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.pub-journal-badge{font-size:11px;color:var(--muted2);font-style:italic}
+.pub-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);line-height:1.45;margin-bottom:0.6rem}
+.pub-authors{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:0.75rem}
+.pub-authors strong{color:var(--ink);font-weight:700;background:rgba(200,169,110,0.15);padding:1px 4px;border-radius:3px}
+.pub-footer-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;padding-top:0.75rem;border-top:1px solid var(--border)}
+.pub-citation-text{font-size:11px;color:var(--muted2);font-style:italic}
+.pub-doi-btn{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:white;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:8px 16px;border-radius:6px;text-decoration:none;transition:all 0.2s;flex-shrink:0}
+.pub-doi-btn:hover{background:var(--teal);transform:translateY(-1px)}
+.pub-doi-btn svg{width:11px;height:11px;flex-shrink:0}
 .pub-status{display:flex;align-items:center;gap:12px;padding:1.25rem 1.5rem;background:var(--teal-light);border-radius:10px;border:1px solid rgba(42,127,127,0.2);margin-top:1.5rem}
 .ps-dot{width:10px;height:10px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;flex-shrink:0}
 .ps-text{font-size:13px;color:var(--teal);font-weight:500}
 
-/* ═══════════ ACHIEVEMENTS ═══════════ */
+/* ── ACHIEVEMENTS ── */
 .ach-section{background:white}
-.ach-featured{
-  background:linear-gradient(135deg,#FBF5E8,#FEF8EE);
-  border:1px solid #E8D5A8;border-radius:20px;padding:2.5rem 3rem;
-  display:flex;align-items:center;gap:3rem;margin-bottom:2rem;
-  position:relative;overflow:hidden;
-}
+.ach-featured{background:linear-gradient(135deg,#FBF5E8,#FEF8EE);border:1px solid #E8D5A8;border-radius:20px;padding:2.5rem 3rem;display:flex;align-items:center;gap:3rem;margin-bottom:2rem;position:relative;overflow:hidden}
 .ach-featured::before{content:'🏆';font-size:100px;position:absolute;right:2rem;opacity:0.08;line-height:1}
 .af-trophy{font-size:56px;flex-shrink:0}
 .af-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
 .af-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3}
 .af-sub{font-size:14px;color:var(--muted);line-height:1.6}
 .certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.cert-card{
-  border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.25rem;
-  text-align:center;background:var(--surface);transition:all 0.25s;
-}
+.cert-card{border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.25rem;text-align:center;background:var(--surface);transition:all 0.25s}
 .cert-card:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 10px 30px rgba(42,127,127,0.1);background:white}
 .cert-icon{font-size:28px;margin-bottom:10px}
 .cert-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px;line-height:1.4}
 .cert-org{font-size:11px;color:var(--teal);font-weight:500}
 
-/* ═══════════ CONTACT ═══════════ */
+/* ── GITHUB ── */
+.github-section{background:var(--surface2)}
+.github-section .sec-eyebrow::before{background:var(--gold)}
+.gh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gh-card{background:white;border:1px solid var(--border);border-radius:14px;padding:1.75rem;text-decoration:none;display:block;transition:all 0.25s;position:relative;overflow:hidden}
+.gh-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal-mid));transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
+.gh-card:hover{border-color:var(--ink);box-shadow:0 12px 36px rgba(0,0,0,0.1);transform:translateY(-3px)}
+.gh-card:hover::after{transform:scaleX(1)}
+.gh-card-icon{width:40px;height:40px;background:var(--ink);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.gh-card-icon svg{width:20px;height:20px;fill:white}
+.gh-card-name{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;font-family:'Playfair Display',serif}
+.gh-card-desc{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:1rem}
+.gh-card-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted2)}
+.gh-lang-dot{width:8px;height:8px;border-radius:50%;background:var(--teal)}
+.gh-lang-dot.gold{background:var(--gold)}
+
+/* ── CONTACT ── */
 .contact-section{background:var(--surface)}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
 .contact-intro{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--muted);line-height:1.7;margin-bottom:2rem}
@@ -304,18 +238,19 @@ section{position:relative;z-index:1}
 .social-row{display:flex;flex-direction:column;gap:10px}
 .soc-btn{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 18px;color:white;text-decoration:none;font-size:13px;font-weight:500;transition:all 0.2s;position:relative;z-index:1}
 .soc-btn:hover{background:rgba(255,255,255,0.12);transform:translateX(4px)}
-.soc-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.soc-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
 .soc-li{background:rgba(0,119,181,0.3)}
+.soc-gh{background:rgba(255,255,255,0.1)}
 .soc-mail{background:rgba(200,169,110,0.2)}
 .soc-label{font-size:11px;color:rgba(255,255,255,0.4);margin-top:1px}
 
-/* ═══════════ FOOTER ═══════════ */
+/* ── FOOTER ── */
 footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
 .footer-brand{font-family:'Playfair Display',serif;font-size:15px;color:rgba(255,255,255,0.7)}
 .footer-brand span{color:var(--gold)}
 .footer-copy{font-size:12px;color:rgba(255,255,255,0.3)}
 
-/* ═══════════ REVEAL ANIMATIONS ═══════════ */
+/* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-delay-1{transition-delay:0.1s}
@@ -323,30 +258,29 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
 .reveal-delay-3{transition-delay:0.3s}
 .reveal-delay-4{transition-delay:0.4s}
 
-/* ═══════════ RESPONSIVE ═══════════ */
+/* ── RESPONSIVE ── */
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;padding:100px 2rem 4rem;gap:3rem;text-align:center}
   .hero-eyebrow{justify-content:center}
-  .hero-btns{justify-content:center}
-  .hero-stats{justify-content:center}
+  .hero-btns,.hero-stats{justify-content:center}
   .hero-visual{order:-1}
   .photo-blob{width:240px;height:290px}
   .float-card{display:none}
   .about-grid,.contact-grid{grid-template-columns:1fr}
-  .res-grid{grid-template-columns:1fr}
+  .res-grid,.gh-grid{grid-template-columns:1fr}
   .certs-grid{grid-template-columns:1fr 1fr}
   .sk-card-wide{grid-column:span 1}
-  .pub-interest-grid{grid-template-columns:1fr}
   nav{padding:0 1.5rem}
   .nav-links{display:none}
   .section-wrap{padding:4rem 1.5rem}
   .ach-featured{flex-direction:column;text-align:center;gap:1.5rem}
-  footer{flex-direction:column;gap:0.5rem;text-align:center}
+  footer{flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem}
+  .pub-count-strip{flex-wrap:wrap;gap:1.5rem}
+  .pub-year-col{writing-mode:horizontal-tb;min-width:60px;padding:1rem}
 }
 </style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <canvas id="bg-canvas"></canvas>
@@ -356,6 +290,7 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
   <div class="nav-logo">Nathish <span>L.</span></div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#publications">Publications</a></li>
@@ -364,36 +299,21 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
   </ul>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-text">
-    <div class="hero-eyebrow">
-      <div class="eyebrow-line"></div>
-      <span class="eyebrow-text">PhD Scholar · Neurogenetics</span>
-    </div>
+    <div class="hero-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">PhD Scholar · Neurogenetics</span></div>
     <h1>Nathish<br><em>Lakshman</em></h1>
     <p class="hero-title">Human Genetics &amp; Molecular Biology · Bharathiar University, Coimbatore — decoding the genetic language of the nervous system.</p>
     <div class="hero-stats">
-      <div class="hs-item">
-        <div class="hs-num">3+</div>
-        <div class="hs-label">Publications</div>
-      </div>
-      <div class="hs-item">
-        <div class="hs-num">M.Sc.</div>
-        <div class="hs-label">Human Genetics</div>
-      </div>
-      <div class="hs-item">
-        <div class="hs-num">1★</div>
-        <div class="hs-label">Int'l Award</div>
-      </div>
-      <div class="hs-item">
-        <div class="hs-num">4+</div>
-        <div class="hs-label">Certifications</div>
-      </div>
+      <div class="hs-item"><div class="hs-num">3</div><div class="hs-label">Publications</div></div>
+      <div class="hs-item"><div class="hs-num">M.Sc.</div><div class="hs-label">Human Genetics</div></div>
+      <div class="hs-item"><div class="hs-num">1★</div><div class="hs-label">Int'l Award</div></div>
+      <div class="hs-item"><div class="hs-num">4+</div><div class="hs-label">Certifications</div></div>
     </div>
     <div class="hero-btns">
-      <a href="#contact" class="btn-gold">Get in Touch</a>
-      <a href="#research" class="btn-ghost">Explore Research ↓</a>
+      <a href="#publications" class="btn-gold">View Publications →</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
     </div>
   </div>
   <div class="hero-visual">
@@ -418,7 +338,7 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
   </div>
 </section>
 
-<!-- ═══ ABOUT ═══ -->
+<!-- ABOUT -->
 <section class="about-section" id="about">
   <div class="section-wrap">
     <div class="sec-header reveal">
@@ -430,7 +350,7 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
         <p class="about-lede">"Understanding the genome is understanding life itself — one mutation at a time."</p>
         <p class="about-body">I am a PhD scholar in Neurogenetics at the Department of Human Genetics and Molecular Biology, Bharathiar University, Coimbatore. My doctoral research focuses on uncovering the genetic and molecular mechanisms that underpin neurological conditions, with a particular interest in oxidative stress pathways and gene mutation analysis.</p>
         <p class="about-body">My academic journey began with a Bachelor of Science in Biotechnology from PSG College of Arts and Science, followed by a Master of Science in Human Genetics and Molecular Biology at Bharathiar University. During my Master's, I conducted award-winning research on the neuroprotective effects of <em>Convolvulus pluricaulis</em> extract and PARK7 gene mutation in SH-SY5Y neuroblastoma cell lines.</p>
-        <p class="about-body">I am driven by the conviction that molecular insights can translate into therapeutic breakthroughs for neurodegenerative diseases — and I am committed to producing rigorous, reproducible science toward that goal.</p>
+        <p class="about-body">I have co-authored peer-reviewed research in the <em>International Review of Neurobiology</em> and <em>Apoptosis</em>, and contributed a book chapter to <em>Advances in Protein Chemistry and Structural Biology</em> — spanning schizophrenia neurobiology, cancer transcriptomics, and neurodegenerative therapeutics.</p>
         <div class="guide-block">
           <div class="gb-label">Research Guide</div>
           <div class="gb-name">Dr. R. Sivasamy</div>
@@ -443,7 +363,8 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
           <div class="info-item"><span class="ii-label">Field</span><span class="ii-val">Neurogenetics</span></div>
           <div class="info-item"><span class="ii-label">Institution</span><span class="ii-val">Bharathiar University</span></div>
           <div class="info-item"><span class="ii-label">Location</span><span class="ii-val">Coimbatore, Tamil Nadu</span></div>
-          <div class="info-item"><span class="ii-label">Email</span><span class="ii-val"><a href="mailto:nathishlakshman@gmail.com" style="color:var(--teal)">nathishlakshman@gmail.com</a></span></div>
+          <div class="info-item"><span class="ii-label">Publications</span><span class="ii-val">3 (2025–2026)</span></div>
+          <div class="info-item"><span class="ii-label">Email</span><span class="ii-val"><a href="mailto:nathishlakshman@gmail.com">nathishlakshman@gmail.com</a></span></div>
         </div>
         <div class="lang-bars" style="margin-top:2rem">
           <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:1rem">Languages</div>
@@ -456,7 +377,7 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
   </div>
 </section>
 
-<!-- ═══ EDUCATION ═══ -->
+<!-- EDUCATION -->
 <section class="edu-section" id="education">
   <div class="section-wrap">
     <div class="sec-header reveal">
@@ -476,7 +397,7 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
         <div class="edu-year">2022 – 2024</div>
         <div class="edu-degree">Master of Science · Human Genetics &amp; Molecular Biology</div>
         <div class="edu-inst">Bharathiar University, Coimbatore, Tamil Nadu</div>
-        <div class="edu-desc">Completed a research-intensive Master's with a project on the neuroprotective potential of <em>Convolvulus pluricaulis</em> extract and PARK7 gene mutation analysis. Won Best Paper Presentation Award at ICLS-ETFP 2024.</div>
+        <div class="edu-desc">Research-intensive Master's with a project on the neuroprotective potential of <em>Convolvulus pluricaulis</em> and PARK7 gene mutation analysis. Won Best Paper Presentation Award at ICLS-ETFP 2024. First peer-reviewed publications co-authored during this period.</div>
       </div>
       <div class="edu-item reveal reveal-delay-2">
         <div class="edu-marker"><div class="edu-marker-inner"></div></div>
@@ -489,7 +410,7 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
   </div>
 </section>
 
-<!-- ═══ RESEARCH ═══ -->
+<!-- RESEARCH -->
 <section class="research-section" id="research">
   <div class="section-wrap">
     <div class="sec-header reveal">
@@ -507,29 +428,29 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
       <div class="res-card reveal reveal-delay-1">
         <div class="rc-chip">Master's Project · 2023–2024</div>
         <div class="rc-title">Neuroprotective Potential of <em>Convolvulus pluricaulis</em></div>
-        <p class="rc-body">Investigated the neuroprotective activity of <em>Convolvulus pluricaulis</em> extract against H₂O₂-induced oxidative stress. Performed PARK7 gene mutation analysis in SH-SY5Y human neuroblastoma cell lines using a battery of molecular and cellular assays.</p>
+        <p class="rc-body">Investigated the neuroprotective activity of <em>Convolvulus pluricaulis</em> extract against H₂O₂-induced oxidative stress. Performed PARK7 gene mutation analysis in SH-SY5Y human neuroblastoma cell lines using MTT, COMET, DCFH-DA and Rh123 assays.</p>
         <div class="rc-tags"><span class="rc-tag">PARK7</span><span class="rc-tag">Oxidative Stress</span><span class="rc-tag">SH-SY5Y</span><span class="rc-tag">H₂O₂</span></div>
-        <div class="rc-footer">Molecular Genetics & Cancer Biology Lab · Dec 2023 – Apr 2024</div>
+        <div class="rc-footer">Molecular Genetics &amp; Cancer Biology Lab · Dec 2023 – Apr 2024</div>
       </div>
       <div class="res-card reveal reveal-delay-2">
-        <div class="rc-chip">Internship · May – Jun 2023</div>
-        <div class="rc-title">Advanced Molecular Biology Techniques</div>
-        <p class="rc-body">Intensive hands-on internship at the Molecular Genetics and Cancer Biology Laboratory, Bharathiar University. Trained in mammalian cell culture, PCR, gel electrophoresis, fluorescence staining, and oxidative stress assays.</p>
-        <div class="rc-tags"><span class="rc-tag">Cell Culture</span><span class="rc-tag">PCR</span><span class="rc-tag">Assay Design</span></div>
-        <div class="rc-footer">Molecular Genetics & Cancer Biology Lab · Bharathiar University</div>
+        <div class="rc-chip">Published · 2025</div>
+        <div class="rc-title">Microbiome &amp; Immune Dysregulation in Schizophrenia</div>
+        <p class="rc-body">Co-authored study on oro-pharyngeal mucosal microbiome alterations and their role in immune system dysregulation in schizophrenia — published in the <em>International Review of Neurobiology</em>, 2025.</p>
+        <div class="rc-tags"><span class="rc-tag">Microbiome</span><span class="rc-tag">Schizophrenia</span><span class="rc-tag">Immunology</span><span class="rc-tag">Neurobiology</span></div>
+        <div class="rc-footer">Int'l Review of Neurobiology, 180, 2025</div>
       </div>
       <div class="res-card reveal reveal-delay-3">
-        <div class="rc-chip">Interest Area</div>
-        <div class="rc-title">Neurodegenerative Disease &amp; Oxidative Stress Pathways</div>
-        <p class="rc-body">Broad research interest in the molecular and genetic underpinnings of Parkinson's-related pathways, oxidative stress mechanisms, and cell-level neuroprotection strategies relevant to diseases such as Parkinson's and Alzheimer's.</p>
-        <div class="rc-tags"><span class="rc-tag">Parkinson's</span><span class="rc-tag">Neurodegeneration</span><span class="rc-tag">Oxidative Stress</span></div>
-        <div class="rc-footer">Active Interest Area · PhD</div>
+        <div class="rc-chip">Published · 2025–2026</div>
+        <div class="rc-title">Cancer Transcriptomics &amp; Neurodegenerative Therapeutics</div>
+        <p class="rc-body">RNA-Seq analysis identifying the role of non-coding pseudogene CDC27P9 in cervical cancer (<em>Apoptosis</em>, 2026); and a book chapter on small molecular therapeutic targets in neurodegenerative diseases (<em>Advances in Protein Chemistry</em>, 2025).</p>
+        <div class="rc-tags"><span class="rc-tag">RNA-Seq</span><span class="rc-tag">CDC27P9</span><span class="rc-tag">Cervical Cancer</span><span class="rc-tag">Small Molecules</span></div>
+        <div class="rc-footer">Apoptosis 2026 · Advances in Protein Chemistry 2025</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SKILLS ═══ -->
+<!-- SKILLS -->
 <section class="skills-section" id="skills">
   <div class="section-wrap">
     <div class="sec-header reveal">
@@ -546,79 +467,97 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
       <div class="sk-card reveal"><div class="sk-icon">🦠</div><div class="sk-name">Mammalian Cell Culture</div><div class="sk-cat">Cell Biology</div></div>
       <div class="sk-card reveal reveal-delay-1"><div class="sk-icon">📉</div><div class="sk-name">MTT Assay</div><div class="sk-cat">Cell Viability</div></div>
       <div class="sk-card reveal reveal-delay-2"><div class="sk-icon">☄️</div><div class="sk-name">COMET Assay</div><div class="sk-cat">DNA Damage Analysis</div></div>
-      <div class="sk-card reveal sk-card-wide"><div class="sk-icon">🔬</div><div class="sk-name">Fluorescence Staining <span class="sk-badge">DCFH-DA &amp; Rh123</span></div><div class="sk-cat">ROS Detection &amp; Mitochondrial Membrane Potential</div><div class="sk-detail">DCFH-DA for intracellular reactive oxygen species quantification; Rhodamine 123 (Rh123) for assessment of mitochondrial membrane potential — both employed in H₂O₂-induced oxidative stress models in SH-SY5Y neuroblastoma cells.</div></div>
-      <div class="sk-card reveal reveal-delay-1"><div class="sk-icon">🧩</div><div class="sk-name">Gene Mutation Analysis</div><div class="sk-cat">Genomics</div></div>
-      <div class="sk-card reveal reveal-delay-2"><div class="sk-icon">🗂️</div><div class="sk-name">NGS Data Analysis</div><div class="sk-cat">Next-Generation Sequencing</div><div class="sk-detail">Processing and analysis of high-throughput sequencing data including quality control, read alignment, variant calling, and annotation pipelines using tools such as FastQC, BWA, GATK, and Bioconductor.</div></div>
-      <div class="sk-card reveal reveal-delay-3"><div class="sk-icon">📊</div><div class="sk-name">Differential Gene Expression Analysis</div><div class="sk-cat">Transcriptomics &amp; RNA-Seq</div><div class="sk-detail">Statistical analysis of gene expression changes across conditions using DESeq2, edgeR, and limma; pathway enrichment (GO, KEGG); volcano plots and heatmap visualisation; pseudogene and non-coding RNA profiling.</div></div>
+      <div class="sk-card sk-card-wide reveal"><div class="sk-icon">💡</div><div class="sk-name">Fluorescence Staining <span class="sk-badge">DCFH-DA &amp; Rh123</span></div><div class="sk-cat">ROS Detection &amp; Mitochondrial Membrane Potential</div><div class="sk-detail">DCFH-DA for intracellular reactive oxygen species quantification; Rhodamine 123 (Rh123) for assessment of mitochondrial membrane potential — both employed in H₂O₂-induced oxidative stress models in SH-SY5Y neuroblastoma cells.</div></div>
+      <div class="sk-card reveal"><div class="sk-icon">🧩</div><div class="sk-name">Gene Mutation Analysis</div><div class="sk-cat">Genomics</div></div>
+      <div class="sk-card reveal reveal-delay-1"><div class="sk-icon">🗂️</div><div class="sk-name">NGS Data Analysis</div><div class="sk-cat">Next-Generation Sequencing</div><div class="sk-detail">Quality control, read alignment, variant calling and annotation using FastQC, BWA, GATK and Bioconductor pipelines.</div></div>
+      <div class="sk-card reveal reveal-delay-2"><div class="sk-icon">📈</div><div class="sk-name">Differential Gene Expression Analysis</div><div class="sk-cat">Transcriptomics &amp; RNA-Seq</div><div class="sk-detail">Statistical analysis using DESeq2, edgeR, and limma; GO/KEGG pathway enrichment; volcano plots, heatmaps; pseudogene and non-coding RNA profiling.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PUBLICATIONS ═══ -->
+<!-- PUBLICATIONS -->
 <section class="pub-section" id="publications">
   <div class="section-wrap">
     <div class="sec-header reveal">
       <div class="sec-eyebrow">Publications</div>
       <div class="sec-title">Research <em>Output</em></div>
     </div>
-
-    <!-- Stats strip -->
     <div class="pub-count-strip reveal">
       <div><div class="pcs-num">3</div><div class="pcs-label">Peer-Reviewed Publications</div></div>
       <div class="pcs-div"></div>
       <div><div class="pcs-num">2025–26</div><div class="pcs-label">Publication Years</div></div>
       <div class="pcs-div"></div>
-      <div><div class="pcs-num">3</div><div class="pcs-label">International Journals / Books</div></div>
+      <div><div class="pcs-num">2</div><div class="pcs-label">Journal Articles</div></div>
+      <div class="pcs-div"></div>
+      <div><div class="pcs-num">1</div><div class="pcs-label">Book Chapter</div></div>
     </div>
-
     <div class="pub-list">
-
-      <!-- Publication 1 -->
+      <!-- PUB 1 -->
       <div class="pub-card reveal">
-        <div class="pub-meta">
-          <span class="pub-year">2026</span>
-          <span class="pub-type">Journal Article · RNA-Seq</span>
+        <div class="pub-year-col">2026</div>
+        <div class="pub-body">
+          <div class="pub-type-row">
+            <span class="pub-type type-rnaseq">Journal Article · RNA-Seq</span>
+            <span class="pub-journal-badge">Apoptosis: An International Journal on Programmed Cell Death</span>
+          </div>
+          <div class="pub-title">Transcriptome sequencing (RNA-Seq) reveals non-coding pseudogene CDC27P9 role in cervical cancer</div>
+          <div class="pub-authors">Antony Edwin Rodrigues, F., Krishnan, D., Abbas, H. H., Raj, M. J. M., Subramani, S., <strong>Lakshman, N.</strong>, Justin, A., Govindaraj, S., &amp; Ramasamy, S.</div>
+          <div class="pub-footer-row">
+            <span class="pub-citation-text">Apoptosis, 31(4), 111 · doi: 10.1007/s10495-026-02327-w</span>
+            <a href="https://doi.org/10.1007/s10495-026-02327-w" target="_blank" class="pub-doi-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              View Paper
+            </a>
+          </div>
         </div>
-        <div class="pub-title">Transcriptome sequencing (RNA-Seq) reveals non-coding pseudogene CDC27P9 role in cervical cancer</div>
-        <div class="pub-authors">Antony Edwin Rodrigues, F., Krishnan, D., Abbas, H. H., Raj, M. J. M., Subramani, S., <strong>Lakshman, N.</strong>, Justin, A., Govindaraj, S., &amp; Ramasamy, S.</div>
-        <div class="pub-journal">Apoptosis: An International Journal on Programmed Cell Death, 31(4), 111</div>
-        <a href="https://doi.org/10.1007/s10495-026-02327-w" target="_blank" class="pub-doi">https://doi.org/10.1007/s10495-026-02327-w</a>
       </div>
-
-      <!-- Publication 2 -->
+      <!-- PUB 2 -->
       <div class="pub-card reveal reveal-delay-1">
-        <div class="pub-meta">
-          <span class="pub-year">2025</span>
-          <span class="pub-type">Journal Article · Neuroscience</span>
+        <div class="pub-year-col">2025</div>
+        <div class="pub-body">
+          <div class="pub-type-row">
+            <span class="pub-type type-neuro">Journal Article · Neuroscience</span>
+            <span class="pub-journal-badge">International Review of Neurobiology</span>
+          </div>
+          <div class="pub-title">Oro-pharyngeal mucosal microbiome alterations causing immune system dysregulation in schizophrenia</div>
+          <div class="pub-authors">Krishnan, D., Ghosh, P., <strong>Lakshman, N.</strong>, Justin, A., &amp; Ramasamy, S.</div>
+          <div class="pub-footer-row">
+            <span class="pub-citation-text">Int. Review of Neurobiology, 180, 125–156 · doi: 10.1016/bs.irn.2025.03.003</span>
+            <a href="https://doi.org/10.1016/bs.irn.2025.03.003" target="_blank" class="pub-doi-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              View Paper
+            </a>
+          </div>
         </div>
-        <div class="pub-title">Oro-pharyngeal mucosal microbiome alterations causing immune system dysregulation in schizophrenia</div>
-        <div class="pub-authors">Krishnan, D., Ghosh, P., <strong>Lakshman, N.</strong>, Justin, A., &amp; Ramasamy, S.</div>
-        <div class="pub-journal">International Review of Neurobiology, 180, 125–156</div>
-        <a href="https://doi.org/10.1016/bs.irn.2025.03.003" target="_blank" class="pub-doi">https://doi.org/10.1016/bs.irn.2025.03.003</a>
       </div>
-
-      <!-- Publication 3 -->
+      <!-- PUB 3 -->
       <div class="pub-card reveal reveal-delay-2">
-        <div class="pub-meta">
-          <span class="pub-year">2025</span>
-          <span class="pub-type">Book Chapter · Neurodegenerative Disease</span>
+        <div class="pub-year-col">2025</div>
+        <div class="pub-body">
+          <div class="pub-type-row">
+            <span class="pub-type type-book">Book Chapter · Neurodegenerative Disease</span>
+            <span class="pub-journal-badge">Advances in Protein Chemistry and Structural Biology</span>
+          </div>
+          <div class="pub-title">Small molecular therapeutic targets for neurodegenerative diseases</div>
+          <div class="pub-authors">Rangappa, N., Upadhyay, R., <strong>Lakshman, N.</strong>, Ramasamy, S., Sevanan, M., Justin, A., &amp; Chinnathambi, S.</div>
+          <div class="pub-footer-row">
+            <span class="pub-citation-text">Adv. Protein Chem. Struct. Biol. · doi: 10.1016/bs.apcsb.2025.10.012</span>
+            <a href="https://doi.org/10.1016/bs.apcsb.2025.10.012" target="_blank" class="pub-doi-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              View Chapter
+            </a>
+          </div>
         </div>
-        <div class="pub-title">Small molecular therapeutic targets for neurodegenerative diseases</div>
-        <div class="pub-authors">Rangappa, N., Upadhyay, R., <strong>Lakshman, N.</strong>, Ramasamy, S., Sevanan, M., Justin, A., &amp; Chinnathambi, S.</div>
-        <div class="pub-journal">Advances in Protein Chemistry and Structural Biology</div>
-        <a href="https://doi.org/10.1016/bs.apcsb.2025.10.012" target="_blank" class="pub-doi">https://doi.org/10.1016/bs.apcsb.2025.10.012</a>
       </div>
-
     </div>
-
-    <div class="pub-status reveal" style="margin-top:2rem">
+    <div class="pub-status reveal" style="margin-top:1.5rem">
       <div class="ps-dot"></div>
       <div class="ps-text">Active PhD research ongoing · Further publications expected — check back for updates.</div>
     </div>
   </div>
 </section>
 
-<!-- ═══ ACHIEVEMENTS ═══ -->
+<!-- ACHIEVEMENTS -->
 <section class="ach-section" id="achievements">
   <div class="section-wrap">
     <div class="sec-header reveal">
@@ -634,31 +573,45 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
       </div>
     </div>
     <div class="certs-grid">
-      <div class="cert-card reveal">
-        <div class="cert-icon">🎓</div>
-        <div class="cert-title">Introduction to Genomic Technologies</div>
-        <div class="cert-org">Johns Hopkins University</div>
-      </div>
-      <div class="cert-card reveal reveal-delay-1">
-        <div class="cert-icon">🧬</div>
-        <div class="cert-title">RNA Biology</div>
-        <div class="cert-org">NPTEL</div>
-      </div>
-      <div class="cert-card reveal reveal-delay-2">
-        <div class="cert-icon">🧘</div>
-        <div class="cert-title">Stress Management</div>
-        <div class="cert-org">NPTEL</div>
-      </div>
-      <div class="cert-card reveal reveal-delay-3">
-        <div class="cert-icon">🔬</div>
-        <div class="cert-title">The Science of Stem Cells</div>
-        <div class="cert-org">American Museum of Natural History</div>
-      </div>
+      <div class="cert-card reveal"><div class="cert-icon">🎓</div><div class="cert-title">Introduction to Genomic Technologies</div><div class="cert-org">Johns Hopkins University</div></div>
+      <div class="cert-card reveal reveal-delay-1"><div class="cert-icon">🧬</div><div class="cert-title">RNA Biology</div><div class="cert-org">NPTEL</div></div>
+      <div class="cert-card reveal reveal-delay-2"><div class="cert-icon">🧘</div><div class="cert-title">Stress Management</div><div class="cert-org">NPTEL</div></div>
+      <div class="cert-card reveal reveal-delay-3"><div class="cert-icon">🔬</div><div class="cert-title">The Science of Stem Cells</div><div class="cert-org">American Museum of Natural History</div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CONTACT ═══ -->
+<!-- GITHUB -->
+<section class="github-section" id="github">
+  <div class="section-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-eyebrow">Open Science</div>
+      <div class="sec-title">GitHub <em>Repositories</em></div>
+    </div>
+    <div class="gh-grid">
+      <a href="https://github.com/NathishL/NathishL.github.io" target="_blank" class="gh-card reveal">
+        <div class="gh-card-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></div>
+        <div class="gh-card-name">NathishL.github.io</div>
+        <div class="gh-card-desc">My academic portfolio website — built with pure HTML/CSS/JS, showcasing research, publications, and scientific profile.</div>
+        <div class="gh-card-meta"><div class="gh-lang-dot"></div> HTML · Academic Portfolio</div>
+      </a>
+      <a href="https://github.com/NathishL/publication-plots" target="_blank" class="gh-card reveal reveal-delay-1">
+        <div class="gh-card-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></div>
+        <div class="gh-card-name">publication-plots</div>
+        <div class="gh-card-desc">Publication-quality scientific figures for genomics &amp; neuroscience — reproducible, high-resolution visualisations from research work.</div>
+        <div class="gh-card-meta"><div class="gh-lang-dot"></div> HTML · Scientific Figures</div>
+      </a>
+      <a href="https://github.com/NathishL" target="_blank" class="gh-card reveal reveal-delay-2">
+        <div class="gh-card-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></div>
+        <div class="gh-card-name">@NathishL Profile</div>
+        <div class="gh-card-desc">Follow for updates on new research code, analysis scripts, and scientific data visualisation projects as the PhD progresses.</div>
+        <div class="gh-card-meta"><div class="gh-lang-dot gold"></div> GitHub Profile · Follow</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="section-wrap">
     <div class="sec-header reveal">
@@ -669,22 +622,10 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
       <div>
         <p class="contact-intro reveal">"Science advances through collaboration. I welcome conversations with fellow researchers, collaborators, and anyone curious about neurogenetics."</p>
         <div class="contact-items">
-          <div class="ci reveal">
-            <div class="ci-ico">📧</div>
-            <div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:nathishlakshman@gmail.com">nathishlakshman@gmail.com</a></div></div>
-          </div>
-          <div class="ci reveal reveal-delay-1">
-            <div class="ci-ico">📞</div>
-            <div><div class="ci-label">Phone</div><div class="ci-val">+91 6379310947</div></div>
-          </div>
-          <div class="ci reveal reveal-delay-2">
-            <div class="ci-ico">🏛️</div>
-            <div><div class="ci-label">Institution</div><div class="ci-val">Dept. of Human Genetics &amp; Molecular Biology, Bharathiar University, Coimbatore – 641046</div></div>
-          </div>
-          <div class="ci reveal reveal-delay-3">
-            <div class="ci-ico">📍</div>
-            <div><div class="ci-label">Hometown</div><div class="ci-val">Chinnamuthur, Sundekuppam, Krishnagiri Dt – 635101, Tamil Nadu, India</div></div>
-          </div>
+          <div class="ci reveal"><div class="ci-ico">📧</div><div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:nathishlakshman@gmail.com">nathishlakshman@gmail.com</a></div></div></div>
+          <div class="ci reveal reveal-delay-1"><div class="ci-ico">📞</div><div><div class="ci-label">Phone</div><div class="ci-val">+91 6379310947</div></div></div>
+          <div class="ci reveal reveal-delay-2"><div class="ci-ico">🏛️</div><div><div class="ci-label">Institution</div><div class="ci-val">Dept. of Human Genetics &amp; Molecular Biology, Bharathiar University, Coimbatore – 641046</div></div></div>
+          <div class="ci reveal reveal-delay-3"><div class="ci-ico">📍</div><div><div class="ci-label">Hometown</div><div class="ci-val">Chinnamuthur, Sundekuppam, Krishnagiri Dt – 635101, Tamil Nadu, India</div></div></div>
         </div>
       </div>
       <div class="reveal reveal-delay-1">
@@ -697,6 +638,10 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
               <div class="soc-icon soc-li">in</div>
               <div><div style="font-size:13px;font-weight:600">LinkedIn</div><div class="soc-label">Nathish Lakshman</div></div>
             </a>
+            <a href="https://github.com/NathishL" target="_blank" class="soc-btn">
+              <div class="soc-icon soc-gh" style="font-size:13px">⌥</div>
+              <div><div style="font-size:13px;font-weight:600">GitHub</div><div class="soc-label">@NathishL</div></div>
+            </a>
             <a href="mailto:nathishlakshman@gmail.com" class="soc-btn">
               <div class="soc-icon soc-mail">✉</div>
               <div><div style="font-size:13px;font-weight:600">Email</div><div class="soc-label">nathishlakshman@gmail.com</div></div>
@@ -708,42 +653,28 @@ footer{background:var(--ink2);padding:2rem 3rem;display:flex;align-items:center;
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-brand">Nathish <span>Lakshman</span></div>
   <div class="footer-copy">© 2026 · PhD Scholar in Neurogenetics · Bharathiar University</div>
 </footer>
 
 <script>
-// Custom cursor
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
 setInterval(()=>{rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px'},16);
-document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';cursor.style.transform='translate(-50%,-50%) scale(0.5)'});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';cursor.style.transform='translate(-50%,-50%) scale(1)'})});
-
-// Nav scroll
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';cursor.style.transform='translate(-50%,-50%) scale(0.5)'});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';cursor.style.transform='translate(-50%,-50%) scale(1)'});
+});
 window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60)});
-
-// Reveal on scroll
-const reveals=document.querySelectorAll('.reveal');
-const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.12});
-reveals.forEach(el=>io.observe(el));
-
-// Background canvas — subtle DNA helix dots
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const canvas=document.getElementById('bg-canvas');
 const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;canvas.height=window.innerHeight;
-window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;drawBg()});
-function drawBg(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  for(let i=0;i<60;i++){
-    const x=Math.random()*canvas.width,y=Math.random()*canvas.height,r=Math.random()*3+1;
-    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
-    ctx.fillStyle=i%3===0?'#C8A96E':i%3===1?'#2A7F7F':'#0D1117';ctx.fill();
-  }
-}
-drawBg();
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;draw()}
+function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);for(let i=0;i<60;i++){const x=Math.random()*canvas.width,y=Math.random()*canvas.height,r=Math.random()*3+1;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=i%3===0?'#C8A96E':i%3===1?'#2A7F7F':'#0D1117';ctx.fill()}}
+window.addEventListener('resize',resize);resize();
 </script>
 </body>
 </html>
